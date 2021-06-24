@@ -24,7 +24,9 @@ The following **stretch** features are implemented:
 
 The following **additional** features are implemented:
 
-* [x] Added an overlay play button to Details Activity Image
+* [x] Added an Overlay play button to Details Activity Image
+* [x] Added a "Flixter icon" to home bar 
+* [x] Added a Vote count to details page 
 
 ## Video Walkthrough
 
