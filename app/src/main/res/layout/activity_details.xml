@@ -58,4 +58,14 @@
         android:layout_marginTop="10dp"
         android:textSize="18sp"
         tools:text="Luca and his best friend Alberto experience an unforgettable summer on the Italian Riviera. But all the fun is threatened by a deeply-held secret: they are sea monsters from another world just below the water’s surface." />
+
+    <TextView
+        android:id="@+id/dtNumOfVotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dtRatingBar"
+        android:layout_marginStart="15dp"
+        android:layout_toEndOf="@+id/frame"
+        android:textSize="20sp"
+        tools:text="(512)" />
 </RelativeLayout>

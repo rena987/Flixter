@@ -1,8 +1,11 @@
 package com.example.flixter;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.palette.graphics.Palette;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -30,6 +33,7 @@ public class DetailsActivity extends AppCompatActivity {
     TextView dtTitle;
     RatingBar dtRatingBar;
     TextView dtSynopsis;
+    TextView dtVoteCount;
     String videoID;
 
     @Override
@@ -43,6 +47,7 @@ public class DetailsActivity extends AppCompatActivity {
         dtTitle = findViewById(R.id.dtTitle);
         dtRatingBar = findViewById(R.id.dtRatingBar);
         dtSynopsis = findViewById(R.id.dtSynopsis);
+        dtVoteCount = findViewById(R.id.dtNumOfVotes);
 
         Intent intent = getIntent();
         Movie movie = (Movie) Parcels.unwrap(intent.getParcelableExtra("movie"));
@@ -53,12 +58,23 @@ public class DetailsActivity extends AppCompatActivity {
         Log.d("DetailsActivity", "Rating: " + rating);
         dtRatingBar.setRating(rating);
         dtSynopsis.setText(movie.getOverview());
+        dtVoteCount.setText("(" + String.valueOf(movie.getVoteCount()) + ")");
 
         Glide.with(this)
                 .load(movie.getPosterPath())
                 .placeholder(R.drawable.flicks_movie_placeholder)
                 .transform(new RoundedCornersTransformation(30, 0))
                 .into(dtPoster);
+
+        BitmapDrawable drawable = (BitmapDrawable) dtPoster.getDrawable();
+        Bitmap bitmap = drawable.getBitmap();
+
+        Palette palette = Palette.from(bitmap).generate();
+        Palette.Swatch vibrant = palette.getVibrantSwatch();
+
+        if (vibrant != null) {
+            view.setBackgroundColor(vibrant.getRgb());
+        }
 
         Log.d("DetailsActivity", "ID: " + movie.getId());
 
