@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.flixter.DetailsActivity;
 import com.example.flixter.R;
+import com.example.flixter.databinding.ItemMovieBinding;
 import com.example.flixter.models.Movie;
 
 import org.jetbrains.annotations.NotNull;
@@ -66,20 +67,16 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView ivPoster;
-        TextView tvTitle;
-        TextView tvOverview;
+        ItemMovieBinding binding;
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
-            ivPoster = itemView.findViewById(R.id.ivPoster);
-            tvOverview = itemView.findViewById(R.id.tvOverview);
-            tvTitle = itemView.findViewById(R.id.tvTitle);
+            binding = ItemMovieBinding.bind(itemView);
         }
 
         public void bind(Movie movie) {
-            tvOverview.setText(movie.getOverview());
-            tvTitle.setText(movie.getTitle());
+            binding.tvOverview.setText(movie.getOverview());
+            binding.tvTitle.setText(movie.getTitle());
 
             String imageUrl;
             int orientation = context.getResources().getConfiguration().orientation;
@@ -93,7 +90,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                     .load(imageUrl)
                     .placeholder(R.drawable.flicks_movie_placeholder)
                     .transform(new RoundedCornersTransformation(30, 0))
-                    .into(ivPoster);
+                    .into(binding.ivPoster);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -1,5 +1,7 @@
 package com.example.flixter.models;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,8 +38,11 @@ public class Movie {
     public static List<Movie> fromJsonArray(JSONArray movieJsonArray) throws JSONException {
         List<Movie> movies = new ArrayList<>();
         for (int i = 0; i < movieJsonArray.length(); i++) {
-            movies.add(new Movie(movieJsonArray.getJSONObject(i)));
+            Movie movie = new Movie(movieJsonArray.getJSONObject(i));
+            Log.d("Movie", movie.getTitle());
+            movies.add(movie);
         }
+        Log.d("Movie", "Size: " + movies.size());
         return movies;
     }
 
